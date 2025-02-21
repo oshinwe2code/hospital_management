@@ -16,7 +16,7 @@ const Navbar = () => {
       id: 3,
       link: "Doctors",
       subLinks: [
-        { id: 1, link: "Appointment", path: "/appointment" },
+        { id: 1, link: "Doctor Profile", path: "/doctor" },
         { id: 2, link: "Doctor Dashboard", path: "/doctor-dashboard" },
       ],
     },
@@ -24,7 +24,7 @@ const Navbar = () => {
       id: 4,
       link: "Patients",
       subLinks: [
-        { id: 1, link: "Patient Dashboard", path: "/patient" },
+        { id: 1, link: "Patient Profile", path: "/patient" },
         {
           id: 2,
           link: "Select Doctor",
@@ -45,7 +45,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white  position-sticky top-0">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white  position-sticky top-0 z-3">
       <div className="container">
         <Link className="navbar-brand" to="/">
           <img src={logo} alt="logo" className="logo-img" />

@@ -1,19 +1,110 @@
 #root {
-  
   margin: 0;
   padding: 0;
   outline: none;
   box-sizing: border-box;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   outline: none;
-  text-decoration: none;
-  list-style: none;
-  text-decoration: none;
-  font-family: 'Poppins', sans-serif;
+  list-style: none !important;
+  text-decoration: none !important;
+  font-family: "Poppins", sans-serif;
 }
 
+:root {
+  --primary-color: rgb(14, 130, 253);
+  --secondary-color: rgb(255, 255, 255);
+  --text-color: rgb(51, 51, 51);
+  --background-color: rgb(245, 245, 245);
+  --border-color: rgb(128, 128, 128);
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease-in-out;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.c_container {
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.c_btn {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+  border-radius: 5px !important;
+  padding: .3rem 1rem !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+.c_btn:hover {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.c_btn.active {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.c_btn_primary {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  padding: .3rem 1rem !important;
+  border-radius: 5px !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+.c_btn_primary:hover {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+}
+
+.c_btn_text {
+  background-color: transparent !important;
+  padding: .3rem 1rem !important;
+  border: none !important;
+  cursor: pointer !important;
+  font-size: 1rem !important;
+}
+
+.c_btn_text:hover {
+  color: var(--primary-color) !important;
+}
+
+@media screen and (max-width: 768px) {
+  .c_container {
+    padding: 0 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .c_container {
+    padding: 0 5px;
+  }
+}
