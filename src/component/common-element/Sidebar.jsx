@@ -1,6 +1,6 @@
 // import  from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import '../Styles/general/Sidebar.css';
 
 const Sidebar = ({ links }) => {

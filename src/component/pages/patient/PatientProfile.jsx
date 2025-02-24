@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { FaHome, FaImage, } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import HeadingNav from "../../common-element/HeadingNav";
 import Sidebar from "../../common-element/Sidebar";
 import Input from "../../common-element/Input";
@@ -219,8 +219,6 @@ const PatientProfile = () => {
               <button className="c_btn_primary">save changes</button>
             </div>
           </div>
-
-          
 
         </div>
       </div>

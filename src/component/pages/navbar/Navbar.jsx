@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Navbar.css"; // External CSS for custom styling
+import "./Navbar.css"; 
+import { Link } from "react-router";
 
 const Navbar = () => {
   const [active, setActive] = useState(false);

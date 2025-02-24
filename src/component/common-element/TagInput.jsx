@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const TagInput = ({ placeholder = "Add a tag", onSubmit  ,label}) => {
+const TagInput = ({ placeholder = "Add a tag", onSubmit, label }) => {
   const [tags, setTags] = useState([]);
   const [input, setInput] = useState("");
 
@@ -35,13 +35,13 @@ const TagInput = ({ placeholder = "Add a tag", onSubmit  ,label}) => {
 
   return (
     <div>
-      <label className="form-label c_label">{label}</label>
+      {label && <label className="form-label c_label">{label}</label>}
       <div className="d-flex flex-wrap align-items-center border rounded p-2">
         {tags.map((tag, index) => (
           <div
             key={index}
             className="badge px-2  me-1 mb-1 d-flex align-items-center"
-            style={{ backgroundColor: `rgb(235, 235, 236)` , color:`rgba(53, 52, 52, 0.71)` }}
+            style={{ backgroundColor: `rgb(235, 235, 236)`, color: `rgba(53, 52, 52, 0.71)` }}
           >
             {tag}
             <button
@@ -64,7 +64,7 @@ const TagInput = ({ placeholder = "Add a tag", onSubmit  ,label}) => {
         {/* Save button */}
         <button
           type="button"
-          className="btn btn-primary ms-2"
+          className="c_btn_primary ms-2"
           onClick={handleSave}
         >
           Save
