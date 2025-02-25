@@ -8,9 +8,9 @@ import { FaRegShareFromSquare } from "react-icons/fa6";
 import { IoSettingsOutline } from "react-icons/io5";
 import HeadingNav from '../../common-element/HeadingNav';
 import { FaHome } from 'react-icons/fa';
-// import Appointment from '../doctor/appointments/Appointment';
-// import profileImg from "../../../assets/profile-01.webp";
-import AppointmentDetails from '../doctor/appointments/AppointmentDetails';
+import Appointment from '../doctor/appointments/Appointment';
+import profileImg from "../../../assets/profile-01.webp";
+// import AppointmentDetails from '../doctor/appointments/AppointmentDetails';
 
 
 const PatientMain = () => {
@@ -22,10 +22,10 @@ const PatientMain = () => {
 
 
 
-    // const appointmentsData = [
-    //     { id: "Apt-001", name: "Adrian", profileImage: profileImg, date: "24 Feb 2025", time: "10:00 AM", visitType: "General Visit", appointmentType: "Video Call", email: "adrian@example.com", phone: "123456789" },
-    //     { id: "Apt-002", name: "Emily", profileImage: profileImg, date: "25 Feb 2025", time: "11:00 AM", visitType: "Consultation", appointmentType: "Audio Call", email: "emily@example.com", phone: "987654321" },
-    // ];
+    const appointmentsData = [
+        { id: "Apt-001", name: "Adrian", profileImage: profileImg, date: "24 Feb 2025", time: "10:00 AM", visitType: "General Visit", appointmentType: "Video Call", email: "adrian@example.com", phone: "123456789" },
+        { id: "Apt-002", name: "Emily", profileImage: profileImg, date: "25 Feb 2025", time: "11:00 AM", visitType: "Consultation", appointmentType: "Audio Call", email: "emily@example.com", phone: "987654321" },
+    ];
     return (
         <div className="container pb-5">
 
@@ -62,8 +62,8 @@ const PatientMain = () => {
 
                 {/* Main Content Column */}
                 <div className="col">
-                    {/* <Appointment  initialAppointments={appointmentsData}/> */}
-                    <AppointmentDetails />
+                    <Appointment  initialAppointments={appointmentsData}/>
+                    {/* <AppointmentDetails /> */}
                 </div>
             </div>
 

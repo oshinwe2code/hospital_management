@@ -11,8 +11,9 @@ import "../../../Styles/doctor/Appointment.css";
 import TagInput from "../../../common-element/TagInput";
 import { FaTrash } from "react-icons/fa";
 import { useState } from "react";
+import propTypes from "prop-types";
 
-const AppointmentDetails = () => {
+const AppointmentDetails = ({ setAppointmentDetails }) => {
   const [medications, setMedications] = useState([]);
   const [startsession, setStartsession] = useState(false);
 
@@ -34,10 +35,17 @@ const AppointmentDetails = () => {
     setMedications(medications.filter((_, i) => i !== index));
   };
 
+  const handlesaveAppointment = () => {
+    setStartsession(false);
+  };
+
   return (
     <div>
       <div className="d-flex  border-bottom border-gray py-2">
-        <button className="c_back_btn ">
+        <button
+          className="c_back_btn"
+          onClick={() => setAppointmentDetails(false)}
+        >
           <BiArrowBack fontSize={25} />
         </button>
         <h4 className="font-size-2 font-weight-700 mt-1 ">
@@ -168,8 +176,7 @@ const AppointmentDetails = () => {
                 style={{ borderRadius: "30px", backgroundColor: "#822BD4" }}
                 onClick={() => setStartsession(true)}
               >
-                {" "}
-                Start Session
+                {startsession === false ? "Start Session" : "InProgress"}
               </button>
             </li>
           </ul>
@@ -177,519 +184,536 @@ const AppointmentDetails = () => {
       </div>
 
       {/* recent Appointments */}
-      {startsession === false && <div className="mt-3">
-        <h3>Recent Appointments</h3>
+      {startsession === false && (
+        <div className="mt-3">
+          <h3>Recent Appointments</h3>
 
-        <ul className="c_appointment_row border border-gray rounded-3 py-2 px-3 py-4 align-items-center">
-          <li className=" d-flex align-items-center">
-            <img
-              src={img}
-              alt="profile photo"
-              className="rounded-3 me-2"
-              width="50px"
-            />
-            <div className="d-flex flex-column">
-              <span className="text-primary font-weight-700">#Apt-001</span>
-              <p className="font-weight-bold">
-                <b>Adrian</b>
-              </p>
-            </div>
-          </li>
-          <li className=" d-flex flex-column align-items-start">
-            <span className="text-muted " style={{ fontSize: "14px" }}>
-              <FaRegClock className="me-2" /> 24 Feb 2025 - 10:00 AM
-            </span>
-            <div className="d-flex gap-3" style={{ fontWeight: "600" }}>
-              <p className="p-0">General Visit</p>
-              <p className="p-0">Video Call</p>
-            </div>
-          </li>
-          <li className=" d-flex flex-column align-items-start">
-            <span>
-              <CiMail className="me-2" /> adrian@example.com
-            </span>
-            <span>
-              <CiPhone className="me-2" /> 123456789
-            </span>
-          </li>
-          <li className=" d-flex  justify-content-end">
-            <button
-              className="c_btn border border-gray rounded-circle d-flex justify-content-center align-items-center p-0"
-              style={{ width: "30px", height: "30px" }}
-            >
-              <FaRegEye fontSize={15} />
-            </button>
-          </li>
-        </ul>
-      </div>}
-
-      {startsession === true && <div className="mt-3">
-        <h2 style={{ fontWeight: "600", fontSize: "20px" }}>
-          Create Appointment Details
-        </h2>
-        <div className="border border-gray rounded-3 p-3">
-          <h4 style={{ fontWeight: "600", fontSize: "18px" }}>
-            Patient information
-          </h4>
-          <ul
-            className="c_appointment_row border-bottom border-gray pb-2"
-            style={{ fontSize: "14px", fontWeight: "600" }}
-          >
-            <li className="px-2 bg-light">
-              <p className="text-muted" style={{ fontWeight: 600 }}>
-                Age/Gender
-              </p>
-              <p> 20 Years/ Male</p>
+          <ul className="c_appointment_row border border-gray rounded-3 py-2 px-3 py-4 align-items-center">
+            <li className=" d-flex align-items-center">
+              <img
+                src={img}
+                alt="profile photo"
+                className="rounded-3 me-2"
+                width="50px"
+              />
+              <div className="d-flex flex-column">
+                <span className="text-primary font-weight-700">#Apt-001</span>
+                <p className="font-weight-bold">
+                  <b>Adrian</b>
+                </p>
+              </div>
             </li>
-            <li className="px-2 bg-light">
-              <p className="text-muted" style={{ fontWeight: 600 }}>
-                Address
-              </p>
-              <p> New York, USA</p>
+            <li className=" d-flex flex-column align-items-start">
+              <span className="text-muted " style={{ fontSize: "14px" }}>
+                <FaRegClock className="me-2" /> 24 Feb 2025 - 10:00 AM
+              </span>
+              <div className="d-flex gap-3" style={{ fontWeight: "600" }}>
+                <p className="p-0">General Visit</p>
+                <p className="p-0">Video Call</p>
+              </div>
             </li>
-            <li className="px-2 bg-light">
-              <p className="text-muted" style={{ fontWeight: 600 }}>
-                Blood Group
-              </p>
-              <p> O+ve</p>
+            <li className=" d-flex flex-column align-items-start">
+              <span>
+                <CiMail className="me-2" /> adrian@example.com
+              </span>
+              <span>
+                <CiPhone className="me-2" /> 123456789
+              </span>
             </li>
-            <li className="px-2 bg-light">
-              <p className="text-muted" style={{ fontWeight: 600 }}>
-                No of Visits
-              </p>
-              <p> 0</p>
+            <li className=" d-flex  justify-content-end">
+              <button
+                className="c_btn border border-gray rounded-circle d-flex justify-content-center align-items-center p-0"
+                style={{ width: "30px", height: "30px" }}
+              >
+                <FaRegEye fontSize={15} />
+              </button>
             </li>
           </ul>
+        </div>
+      )}
 
-          {/* vitals */}
+      {/* patient information */}
 
-          <h4
-            className="mt-3 pb-3"
-            style={{ fontWeight: "600", fontSize: "18px" }}
-          >
-            Vitals
-          </h4>
-          <div
-            className="row g-3"
-            style={{ fontWeight: 600, fontSize: "14px" }}
-          >
-            {/* Temperature */}
-            <div className="col-md-3">
-              <label className="form-label text-black">Temperature</label>
-              <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Eg: 97.8"
-                />
-                <span
-                  className="input-group-text"
-                  style={{ fontSize: "14px", fontWeight: "600" }}
-                >
-                  °F
-                </span>
+      {startsession === true && (
+        <div className="mt-3">
+          <h2 style={{ fontWeight: "600", fontSize: "20px" }}>
+            Create Appointment Details
+          </h2>
+          <div className="border border-gray rounded-3 p-3">
+            <h4 style={{ fontWeight: "600", fontSize: "18px" }}>
+              Patient information
+            </h4>
+            <ul
+              className="c_appointment_row border-bottom border-gray pb-2"
+              style={{ fontSize: "14px", fontWeight: "600" }}
+            >
+              <li className="px-2 bg-light">
+                <p className="text-muted" style={{ fontWeight: 600 }}>
+                  Age/Gender
+                </p>
+                <p> 20 Years/ Male</p>
+              </li>
+              <li className="px-2 bg-light">
+                <p className="text-muted" style={{ fontWeight: 600 }}>
+                  Address
+                </p>
+                <p> New York, USA</p>
+              </li>
+              <li className="px-2 bg-light">
+                <p className="text-muted" style={{ fontWeight: 600 }}>
+                  Blood Group
+                </p>
+                <p> O+ve</p>
+              </li>
+              <li className="px-2 bg-light">
+                <p className="text-muted" style={{ fontWeight: 600 }}>
+                  No of Visits
+                </p>
+                <p> 0</p>
+              </li>
+            </ul>
+
+            {/* vitals */}
+
+            <h4
+              className="mt-3 pb-3"
+              style={{ fontWeight: "600", fontSize: "18px" }}
+            >
+              Vitals
+            </h4>
+            <div
+              className="row g-3"
+              style={{ fontWeight: 600, fontSize: "14px" }}
+            >
+              {/* Temperature */}
+              <div className="col-md-3">
+                <label className="form-label text-black">Temperature</label>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Eg: 97.8"
+                  />
+                  <span
+                    className="input-group-text"
+                    style={{ fontSize: "14px", fontWeight: "600" }}
+                  >
+                    °F
+                  </span>
+                </div>
+              </div>
+
+              {/* Pulse */}
+              <div className="col-md-3">
+                <label className="form-label ">Pulse</label>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Eg: 454"
+                  />
+                  <span
+                    className="input-group-text"
+                    style={{ fontSize: "14px", fontWeight: "600" }}
+                  >
+                    mmHg
+                  </span>
+                </div>
+              </div>
+
+              {/* Respiratory Rate */}
+              <div className="col-md-3">
+                <label className="form-label ">Respiratory Rate</label>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Eg: 97.8"
+                  />
+                  <span
+                    className="input-group-text"
+                    style={{ fontSize: "14px", fontWeight: "600" }}
+                  >
+                    rpm
+                  </span>
+                </div>
+              </div>
+
+              {/* SPO2 */}
+              <div className="col-md-3">
+                <label className="form-label ">SPO2</label>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Eg: 98"
+                  />
+                  <span
+                    className="input-group-text"
+                    style={{ fontSize: "14px", fontWeight: "600" }}
+                  >
+                    %
+                  </span>
+                </div>
+              </div>
+
+              {/* Height */}
+              <div className="col-md-3">
+                <label className="form-label ">Height</label>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Eg: 97.8"
+                  />
+                  <span
+                    className="input-group-text"
+                    style={{ fontSize: "14px", fontWeight: "600" }}
+                  >
+                    cm
+                  </span>
+                </div>
+              </div>
+
+              {/* Weight */}
+              <div className="col-md-3">
+                <label className="form-label ">Weight</label>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Eg: 97.8"
+                  />
+                  <span
+                    className="input-group-text"
+                    style={{ fontSize: "14px", fontWeight: "600" }}
+                  >
+                    Kg
+                  </span>
+                </div>
+              </div>
+
+              {/* Waist */}
+              <div className="col-md-3">
+                <label className="form-label ">Waist</label>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Eg: 97.8"
+                  />
+                  <span
+                    className="input-group-text"
+                    style={{ fontSize: "14px", fontWeight: "600" }}
+                  >
+                    cm
+                  </span>
+                </div>
+              </div>
+
+              {/* BMI */}
+              <div className="col-md-3">
+                <label className="form-label ">BMI</label>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Eg: 454"
+                  />
+                  <span
+                    className="input-group-text"
+                    style={{ fontSize: "14px", fontWeight: "600" }}
+                  >
+                    kg/cm²
+                  </span>
+                </div>
+              </div>
+
+              {/* BSA */}
+              <div className="col-md-3">
+                <label className="form-label ">BSA</label>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Eg: 54"
+                  />
+                  <span
+                    className="input-group-text"
+                    style={{ fontSize: "14px", fontWeight: "600" }}
+                  >
+                    m²
+                  </span>
+                </div>
               </div>
             </div>
+            {/* previous medical history */}
 
-            {/* Pulse */}
-            <div className="col-md-3">
-              <label className="form-label ">Pulse</label>
-              <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Eg: 454"
-                />
-                <span
-                  className="input-group-text"
-                  style={{ fontSize: "14px", fontWeight: "600" }}
+            <div className="row mt-3 pb-3">
+              <div className="col-md-12">
+                <label
+                  className="form-label "
+                  style={{ fontWeight: "600", fontSize: "18px" }}
                 >
-                  mmHg
-                </span>
-              </div>
-            </div>
-
-            {/* Respiratory Rate */}
-            <div className="col-md-3">
-              <label className="form-label ">Respiratory Rate</label>
-              <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Eg: 97.8"
-                />
-                <span
-                  className="input-group-text"
-                  style={{ fontSize: "14px", fontWeight: "600" }}
-                >
-                  rpm
-                </span>
-              </div>
-            </div>
-
-            {/* SPO2 */}
-            <div className="col-md-3">
-              <label className="form-label ">SPO2</label>
-              <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Eg: 98"
-                />
-                <span
-                  className="input-group-text"
-                  style={{ fontSize: "14px", fontWeight: "600" }}
-                >
-                  %
-                </span>
-              </div>
-            </div>
-
-            {/* Height */}
-            <div className="col-md-3">
-              <label className="form-label ">Height</label>
-              <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Eg: 97.8"
-                />
-                <span
-                  className="input-group-text"
-                  style={{ fontSize: "14px", fontWeight: "600" }}
-                >
-                  cm
-                </span>
-              </div>
-            </div>
-
-            {/* Weight */}
-            <div className="col-md-3">
-              <label className="form-label ">Weight</label>
-              <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Eg: 97.8"
-                />
-                <span
-                  className="input-group-text"
-                  style={{ fontSize: "14px", fontWeight: "600" }}
-                >
-                  Kg
-                </span>
-              </div>
-            </div>
-
-            {/* Waist */}
-            <div className="col-md-3">
-              <label className="form-label ">Waist</label>
-              <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Eg: 97.8"
-                />
-                <span
-                  className="input-group-text"
-                  style={{ fontSize: "14px", fontWeight: "600" }}
-                >
-                  cm
-                </span>
-              </div>
-            </div>
-
-            {/* BMI */}
-            <div className="col-md-3">
-              <label className="form-label ">BMI</label>
-              <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Eg: 454"
-                />
-                <span
-                  className="input-group-text"
-                  style={{ fontSize: "14px", fontWeight: "600" }}
-                >
-                  kg/cm²
-                </span>
-              </div>
-            </div>
-
-            {/* BSA */}
-            <div className="col-md-3">
-              <label className="form-label ">BSA</label>
-              <div className="input-group">
-                <input
-                  type="text"
+                  Previous Medical History
+                </label>
+                <textarea
                   className="form-control"
                   placeholder="Eg: 54"
-                />
-                <span
-                  className="input-group-text"
-                  style={{ fontSize: "14px", fontWeight: "600" }}
-                >
-                  m²
-                </span>
+                  rows={3}
+                ></textarea>
               </div>
             </div>
-          </div>
-          {/* previous medical history */}
-
-          <div className="row mt-3 pb-3">
-            <div className="col-md-12">
-              <label
-                className="form-label "
-                style={{ fontWeight: "600", fontSize: "18px" }}
-              >
-                Previous Medical History
-              </label>
-              <textarea
-                className="form-control"
-                placeholder="Eg: 54"
-                rows={3}
-              ></textarea>
-            </div>
-          </div>
-          {/* clinical notes */}
-          <div className="row mt-3 pb-3">
-            <div className="col-md-12">
-              <label
-                className="form-label "
-                style={{ fontWeight: "600", fontSize: "18px" }}
-              >
-                Clinical Notes
-              </label>
-              <textarea
-                className="form-control"
-                placeholder="Eg: 54"
-                rows={3}
-              ></textarea>
-            </div>
-          </div>
-
-          {/* clinical notes */}
-          <div className="row mt-3 pb-3">
-            <div className="col-md-12">
-              <h4
-                className="pb-1"
-                style={{ fontWeight: "600", fontSize: "18px" }}
-              >
-                Clinical Notes
-              </h4>
-              <TagInput placeholder="Add New" />
-            </div>
-          </div>
-
-          {/* complaints */}
-          <div className="row mt-3 pb-3">
-            <div className="col-md-12">
-              <h4
-                className="pb-1"
-                style={{ fontWeight: "600", fontSize: "18px" }}
-              >
-                Laboratory Tests
-              </h4>
-              <TagInput placeholder="Add New" />
-            </div>
-          </div>
-          <div className="row mt-3 pb-3">
-            <div className="col-md-12">
-              <h4
-                className="pb-1"
-                style={{ fontWeight: "600", fontSize: "18px" }}
-              >
-                Complaints
-              </h4>
-              <TagInput placeholder="Add New" />
-            </div>
-          </div>
-
-          {/* diagonosis */}
-          <div className="row mt-3 pb-3">
-            <div className="col-md-12">
-              <h4
-                className="pb-1"
-                style={{ fontWeight: "600", fontSize: "18px" }}
-              >
-                Diagonosis
-              </h4>
-
-              <div className=" d-flex align-items-center justify-content-between pb-3">
+            {/* clinical notes */}
+            <div className="row mt-3 pb-3">
+              <div className="col-md-12">
                 <label
-                  htmlFor=""
-                  style={{ fontWeight: "600", fontSize: "16px" }}
+                  className="form-label "
+                  style={{ fontWeight: "600", fontSize: "18px" }}
                 >
-                  Fever
+                  Clinical Notes
                 </label>
-                <input
-                  type="text"
+                <textarea
                   className="form-control"
-                  placeholder="Diagnosis"
-                  style={{ width: "75%" }}
-                />
-              </div>
-
-              <div className="d-flex align-items-center justify-content-between pb-3">
-                <label
-                  htmlFor=""
-                  style={{ fontWeight: "600", fontSize: "16px" }}
-                >
-                  Headache
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Diagnosis"
-                  style={{ width: "75%" }}
-                />
-              </div>
-
-              <div className="d-flex align-items-center justify-content-between pb-3">
-                <label
-                  htmlFor=""
-                  style={{ fontWeight: "600", fontSize: "16px" }}
-                >
-                  Stomach Ache
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Diagnosis"
-                  style={{ width: "75%" }}
-                />
+                  placeholder="Eg: 54"
+                  rows={3}
+                ></textarea>
               </div>
             </div>
-          </div>
 
-          {/* medication  */}
-
-          <div className="row mt-3 pb-3">
-            <div className="col-md-12">
-              <h4
-                className="pb-1"
-                style={{ fontWeight: "600", fontSize: "18px" }}
-              >
-                Medication
-              </h4>
-              <div className="d-flex gap-2 align-items-center justify-content-end pb-3">
-                <button
-                  className="text-primary border-0 bg-transparent"
-                  style={{ fontSize: "16px", fontWeight: "600" }}
-                  onClick={addMedication}
+            {/* clinical notes */}
+            <div className="row mt-3 pb-3">
+              <div className="col-md-12">
+                <h4
+                  className="pb-1"
+                  style={{ fontWeight: "600", fontSize: "18px" }}
                 >
-                  Add new
-                </button>
+                  Clinical Notes
+                </h4>
+                <TagInput placeholder="Add New" />
               </div>
-              {medications.map((med, index) => (
-                <div
-                  key={index}
-                  className="d-flex gap-2 align-items-center justify-content-between pb-1"
+            </div>
+
+            {/* complaints */}
+            <div className="row mt-3 pb-3">
+              <div className="col-md-12">
+                <h4
+                  className="pb-1"
+                  style={{ fontWeight: "600", fontSize: "18px" }}
                 >
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Name"
-                    value={med.name}
-                    onChange={(e) =>
-                      updateMedication(index, "name", e.target.value)
-                    }
-                  />
-                  <select
-                    className="form-control"
-                    value={med.type}
-                    onChange={(e) =>
-                      updateMedication(index, "type", e.target.value)
-                    }
+                  Laboratory Tests
+                </h4>
+                <TagInput placeholder="Add New" />
+              </div>
+            </div>
+            <div className="row mt-3 pb-3">
+              <div className="col-md-12">
+                <h4
+                  className="pb-1"
+                  style={{ fontWeight: "600", fontSize: "18px" }}
+                >
+                  Complaints
+                </h4>
+                <TagInput placeholder="Add New" />
+              </div>
+            </div>
+
+            {/* diagonosis */}
+            <div className="row mt-3 pb-3">
+              <div className="col-md-12">
+                <h4
+                  className="pb-1"
+                  style={{ fontWeight: "600", fontSize: "18px" }}
+                >
+                  Diagonosis
+                </h4>
+
+                <div className=" d-flex align-items-center justify-content-between pb-3">
+                  <label
+                    htmlFor=""
+                    style={{ fontWeight: "600", fontSize: "16px" }}
                   >
-                    <option value="">Select Type</option>
-                    <option value="Video call">Video call</option>
-                    <option value="Direct Visit">Direct Visit</option>
-                  </select>
+                    Fever
+                  </label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Dosage"
-                    value={med.dosage}
-                    onChange={(e) =>
-                      updateMedication(index, "dosage", e.target.value)
-                    }
+                    placeholder="Diagnosis"
+                    style={{ width: "75%" }}
                   />
-                  <select
-                    className="form-control"
-                    value={med.duration}
-                    onChange={(e) =>
-                      updateMedication(index, "duration", e.target.value)
-                    }
+                </div>
+
+                <div className="d-flex align-items-center justify-content-between pb-3">
+                  <label
+                    htmlFor=""
+                    style={{ fontWeight: "600", fontSize: "16px" }}
                   >
-                    <option value="">Select Duration</option>
-                    <option value="Not Available">Not Available</option>
-                  </select>
+                    Headache
+                  </label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Instruction"
-                    value={med.instruction}
-                    onChange={(e) =>
-                      updateMedication(index, "instruction", e.target.value)
-                    }
+                    placeholder="Diagnosis"
+                    style={{ width: "75%" }}
                   />
+                </div>
+
+                <div className="d-flex align-items-center justify-content-between pb-3">
+                  <label
+                    htmlFor=""
+                    style={{ fontWeight: "600", fontSize: "16px" }}
+                  >
+                    Stomach Ache
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Diagnosis"
+                    style={{ width: "75%" }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* medication  */}
+
+            <div className="row mt-3 pb-3">
+              <div className="col-md-12">
+                <h4
+                  className="pb-1"
+                  style={{ fontWeight: "600", fontSize: "18px" }}
+                >
+                  Medication
+                </h4>
+                <div className="d-flex gap-2 align-items-center justify-content-end pb-3">
                   <button
-                    className="text-danger border-0 bg-transparent"
-                    onClick={() => removeMedication(index)}
+                    className="text-primary border-0 bg-transparent"
+                    style={{ fontSize: "16px", fontWeight: "600" }}
+                    onClick={addMedication}
                   >
-                    <FaTrash />
+                    Add new
                   </button>
                 </div>
-              ))}
+                {medications.map((med, index) => (
+                  <div
+                    key={index}
+                    className="d-flex gap-2 align-items-center justify-content-between pb-1"
+                  >
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Name"
+                      value={med.name}
+                      onChange={(e) =>
+                        updateMedication(index, "name", e.target.value)
+                      }
+                    />
+                    <select
+                      className="form-control"
+                      value={med.type}
+                      onChange={(e) =>
+                        updateMedication(index, "type", e.target.value)
+                      }
+                    >
+                      <option value="">Select Type</option>
+                      <option value="Video call">Video call</option>
+                      <option value="Direct Visit">Direct Visit</option>
+                    </select>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Dosage"
+                      value={med.dosage}
+                      onChange={(e) =>
+                        updateMedication(index, "dosage", e.target.value)
+                      }
+                    />
+                    <select
+                      className="form-control"
+                      value={med.duration}
+                      onChange={(e) =>
+                        updateMedication(index, "duration", e.target.value)
+                      }
+                    >
+                      <option value="">Select Duration</option>
+                      <option value="Not Available">Not Available</option>
+                    </select>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Instruction"
+                      value={med.instruction}
+                      onChange={(e) =>
+                        updateMedication(index, "instruction", e.target.value)
+                      }
+                    />
+                    <button
+                      className="text-danger border-0 bg-transparent"
+                      onClick={() => removeMedication(index)}
+                    >
+                      <FaTrash />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* advice  */}
+
+            <div className="mt-3">
+              <h4
+                className="pb-1"
+                style={{ fontWeight: "600", fontSize: "18px" }}
+              >
+                Advice
+              </h4>
+              <textarea
+                type="text"
+                className="form-control"
+                placeholder="Diagnosis"
+                style={{ width: "100%" }}
+                rows={3}
+              />
+            </div>
+
+            {/* follow up */}
+
+            <div className="mt-3">
+              <h4
+                className="pb-1"
+                style={{ fontWeight: "600", fontSize: "18px" }}
+              >
+                Follow Up
+              </h4>
+              <textarea
+                type="text"
+                className="form-control"
+                placeholder="Diagnosis"
+                style={{ width: "100%" }}
+                rows={3}
+              />
             </div>
           </div>
 
-          {/* advice  */}
-
-          <div className="mt-3">
-            <h4
-              className="pb-1"
-              style={{ fontWeight: "600", fontSize: "18px" }}
+          <div className="d-flex gap-2 align-items-center justify-content-end mt-3">
+            <button className="c_btn" onClick={() => setStartsession(false)}>
+              cancel
+            </button>
+            <button
+              className="c_btn_primary"
+              onClick={() => handlesaveAppointment()}
             >
-              Advice
-            </h4>
-            <textarea
-              type="text"
-              className="form-control"
-              placeholder="Diagnosis"
-              style={{ width: "100%" }}
-              rows={3}
-            />
-          </div>
-
-          {/* follow up */}
-
-          <div className="mt-3">
-            <h4
-              className="pb-1"
-              style={{ fontWeight: "600", fontSize: "18px" }}
-            >
-              Follow Up
-            </h4>
-            <textarea
-              type="text"
-              className="form-control"
-              placeholder="Diagnosis"
-              style={{ width: "100%" }}
-              rows={3}
-            />
+              Save & End Appointement
+            </button>
           </div>
         </div>
-
-        <div className="d-flex gap-2 align-items-center justify-content-end mt-3">
-          <button className="c_btn">cancel</button>
-          <button className="c_btn_primary">Save & End Appointement</button>
-        </div>
-      </div>}
+      )}
     </div>
   );
+};
+
+AppointmentDetails.propTypes = {
+  setAppointmentDetails: propTypes.func,
 };
 
 export default AppointmentDetails;
