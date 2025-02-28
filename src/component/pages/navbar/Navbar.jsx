@@ -18,6 +18,7 @@ const Navbar = () => {
       subLinks: [
         { id: 1, link: "Doctor Profile", path: "/doctor" },
         { id: 2, link: "Doctor Dashboard", path: "/doctor-dashboard" },
+         { id: 3, link: "Login", path: "/doctorlogin" },
       ],
     },
     {
@@ -25,8 +26,11 @@ const Navbar = () => {
       link: "Patients",
       subLinks: [
         { id: 1, link: "Patient Profile", path: "/patient" },
+        { id: 2, link: "Patient Dashboard", path: "/vital" },
+        { id: 3, link: "patient register", path: "/patientregister" },
+        { id: 4, link: "login", path: "/patientlogin" },
         {
-          id: 2,
+          id: 5,
           link: "Select Doctor",
           subLinks: [
             { id: 1, link: "Select Doctor", path: "/select-doctor" },
@@ -35,7 +39,8 @@ const Navbar = () => {
         },
       ],
     },
-    { id: 5, link: "Contact Us", path: "/contact" },
+    { id: 6, link: "Contact Us", path: "/contact" },
+    
   ];
 
   const toggleMenu = () => {
