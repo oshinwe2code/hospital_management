@@ -16,7 +16,8 @@ import { RxDashboard } from "react-icons/rx";
 import { CiMoneyBill } from "react-icons/ci";
 import { RiUserFollowLine } from "react-icons/ri";
 
-import Appointment from "./appointments/Appointment";
+// import Appointment from "./appointments/Appointment";
+import Request from "./Request";
 
 
 const DoctorMain = () => {
@@ -72,7 +73,8 @@ const DoctorMain = () => {
 
                 {/* Main Content Column */}
                 <div className="col">
-                    <Appointment />
+                    {/* <Appointment /> */}
+                    <Request />
                 </div>
             </div>
         </div>

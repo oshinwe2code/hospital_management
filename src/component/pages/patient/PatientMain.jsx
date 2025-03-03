@@ -10,6 +10,7 @@ import HeadingNav from '../../common-element/HeadingNav';
 import { FaHome } from 'react-icons/fa';
 import Appointment from '../doctor/appointments/Appointment';
 import profileImg from "../../../assets/profile-01.webp";
+import MyPatient from '../doctor/mypatient/MyPatient';
 // import AppointmentDetails from '../doctor/appointments/AppointmentDetails';
 
 
@@ -28,7 +29,6 @@ const PatientMain = () => {
     ];
     return (
         <div className="container pb-5">
-
             <div className="row">
                 <HeadingNav
                     icon={<FaHome />}
@@ -62,8 +62,9 @@ const PatientMain = () => {
 
                 {/* Main Content Column */}
                 <div className="col">
-                    <Appointment  initialAppointments={appointmentsData}/>
+                    {/* <Appointment  initialAppointments={appointmentsData}/> */}
                     {/* <AppointmentDetails /> */}
+                    <MyPatient/>
                 </div>
             </div>
 
