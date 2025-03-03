@@ -16,21 +16,16 @@ const Appointment = () => {
 
   const [appointmentDetails, setAppointmentDetails] = useState(false);
 
-
   // console.log(initialAppointment);
 
   return (
-
     <>
       {appointmentDetails === true && (
-        <AppointmentDetails
-          setAppointmentDetails={setAppointmentDetails}
-        />
+        <AppointmentDetails setAppointmentDetails={setAppointmentDetails} />
       )}
 
       {appointmentDetails === false && (
         <div className="p-0">
-
           <div className="d-flex gap-4 px-2 py-2 justify-content-between border-bottom border-gray">
             <h4 className=" font-size-2 font-weight-700 pb-2">Appointments</h4>
             <div className=" d-flex gap-2 align-items-center border border-gray rounded-3 px-2 py-0 w-25">
@@ -49,22 +44,25 @@ const Appointment = () => {
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex gap-2 flex-wrap mt-3 py-3 rounded-3">
               <button
-                className={`c_btn ${activeTab === "upcoming" ? "active" : ""
-                  } border border-gray`}
+                className={`c_btn ${
+                  activeTab === "upcoming" ? "active" : ""
+                } border border-gray`}
                 onClick={() => setActiveTab("upcoming")}
               >
                 Upcoming <span>(3)</span>
               </button>
               <button
-                className={`c_btn ${activeTab === "cancelled" ? "active" : ""
-                  } border border-gray`}
+                className={`c_btn ${
+                  activeTab === "cancelled" ? "active" : ""
+                } border border-gray`}
                 onClick={() => setActiveTab("cancelled")}
               >
                 Cancelled <span>(1)</span>
               </button>
               <button
-                className={`c_btn ${activeTab === "completed" ? "active" : ""
-                  } border border-gray`}
+                className={`c_btn ${
+                  activeTab === "completed" ? "active" : ""
+                } border border-gray`}
                 onClick={() => setActiveTab("completed")}
               >
                 Completed <span>(1)</span>
@@ -272,8 +270,8 @@ const Appointment = () => {
 
           {/* Upcoming Appointment */}
           {activeTab && activeTab === "upcoming" && (
-            <ul className="row border border-gray rounded-3 p-0 align-items-center">
-              <li className="col d-flex align-items-center mt-4">
+            <ul className="row border border-gray rounded-3 p-4 m-0 align-items-center">
+              <li className="col d-flex align-items-center ">
                 <img
                   src={img}
                   alt="profile photo"
@@ -287,7 +285,7 @@ const Appointment = () => {
                   </p>
                 </div>
               </li>
-              <li className="col d-flex flex-column align-items-start mt-4">
+              <li className="col d-flex flex-column align-items-start">
                 <span className="text-muted " style={{ fontSize: "14px" }}>
                   <FaRegClock className="me-2" /> 24 Feb 2025 - 10:00 AM
                 </span>
@@ -305,10 +303,9 @@ const Appointment = () => {
                 </span>
               </li>
               <li className="col-auto d-flex gap-2 pt-2">
-
                 <button
                   className="c_btn border border-gray rounded-circle d-flex justify-content-center align-items-center p-0"
-                  style={{ width: "30px", height: "30px" }} 
+                  style={{ width: "30px", height: "30px" }}
                   onClick={() => setAppointmentDetails(true)}
                 >
                   <FaRegEye fontSize={15} />
@@ -336,8 +333,8 @@ const Appointment = () => {
           {/* Cancelled Appointment */}
 
           {activeTab && activeTab === "cancelled" && (
-            <ul className="row border border-gray rounded-3 p-0 align-items-center">
-              <li className="col-md-4 d-flex align-items-center mt-4">
+            <ul className="row border border-gray rounded-3 p-4 m-0 align-items-center">
+              <li className="col-md-4 d-flex align-items-center ">
                 <img
                   src={img}
                   alt="profile photo"
@@ -351,7 +348,7 @@ const Appointment = () => {
                   </p>
                 </div>
               </li>
-              <li className="col-md-4 d-flex flex-column align-items-start mt-4">
+              <li className="col-md-4 d-flex flex-column align-items-start ">
                 <span className="text-muted " style={{ fontSize: "14px" }}>
                   <FaRegClock className="me-2" /> 24 Feb 2025 - 10:00 AM
                 </span>
@@ -370,8 +367,8 @@ const Appointment = () => {
 
           {/* Completed Appointment */}
           {activeTab && activeTab === "completed" && (
-            <ul className="row border border-gray rounded-3 p-0 align-items-center">
-              <li className="col-md-4 d-flex align-items-center mt-4">
+            <ul className="row border border-gray rounded-3 p-4 m-0 align-items-center">
+              <li className="col-md-4 d-flex align-items-center ">
                 <img
                   src={img}
                   alt="profile photo"
@@ -385,7 +382,7 @@ const Appointment = () => {
                   </p>
                 </div>
               </li>
-              <li className="col-md-4 d-flex flex-column align-items-start mt-4">
+              <li className="col-md-4 d-flex flex-column align-items-start ">
                 <span className="text-muted " style={{ fontSize: "14px" }}>
                   <FaRegClock className="me-2" /> 24 Feb 2025 - 10:00 AM
                 </span>
@@ -410,9 +407,21 @@ const Appointment = () => {
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
-              <li className="page-item"><a className="page-link" href="#">1</a></li>
-              <li className="page-item"><a className="page-link" href="#">2</a></li>
-              <li className="page-item"><a className="page-link" href="#">3</a></li>
+              <li className="page-item">
+                <a className="page-link" href="#">
+                  1
+                </a>
+              </li>
+              <li className="page-item">
+                <a className="page-link" href="#">
+                  2
+                </a>
+              </li>
+              <li className="page-item">
+                <a className="page-link" href="#">
+                  3
+                </a>
+              </li>
               <li className="page-item">
                 <a className="page-link" href="#" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
@@ -420,12 +429,9 @@ const Appointment = () => {
               </li>
             </ul>
           </nav>
-
         </div>
       )}
-
     </>
-
   );
 };
 

@@ -9,7 +9,7 @@ const Sidebar = ({ links = [] }) => { // Default to an empty array
         {links.map((link, index) => (
           <li key={index} className="c_links">
             {link.icon && <span className="me-2">{link.icon}</span>}
-            <Link to={link.path} className="text-decoration-none">
+            <Link to={`/doctor/${link.path}`} className="text-decoration-none">
               {link.label}
             </Link>
           </li>

@@ -5,6 +5,7 @@ import "./component/Styles/general/General.css";
 import DoctorMain from "./component/pages/doctor/DoctorMain";
 import Navbar from "./component/pages/navbar/Navbar";
 import PatientMain from "./component/pages/patient/PatientMain";
+
 import PatientVital from "./component/pages/patient/pateint_Vital/PatientVital";
 //import PateintMedicalRecords from "./component/pages/patient/PateintMedicalRecords";
 import PateintMedicalRecords from"./component/pages/patient/MedicalRecords/PateintMedicalRecords";
@@ -16,7 +17,9 @@ import Patient_Forget from "./component/pages/registerPage/Patient_Forget";
 import Doctor_Login from "./component/pages/registerPage/Doctor_Login";
 import Doctor_Register from "./component/pages/registerPage/Doctor_Register";
 import Doctor_Register2 from "./component/pages/registerPage/Doctor_Register2";
-import BasicDetails from "./component/pages/doctor/profilesetting/BasicDetails";
+//import BasicDetails from "./component/pages/doctor/profilesetting/BasicDetails";
+
+
 function App() {
   const location = useLocation();
 

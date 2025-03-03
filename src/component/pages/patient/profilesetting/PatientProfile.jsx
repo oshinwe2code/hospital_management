@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import { FaHome, FaImage, } from "react-icons/fa";
 import { Link } from "react-router";
-import HeadingNav from "../../common-element/HeadingNav";
-import Sidebar from "../../common-element/Sidebar";
-import Input from "../../common-element/Input";
+import HeadingNav from "../../../common-element/HeadingNav";
+import Sidebar from "../../../common-element/Sidebar";
+import Input from "../../../common-element/Input";
 import img from "../../../assets/react.svg";
 import { RxDashboard } from "react-icons/rx";
 import { FaRegShareFromSquare } from "react-icons/fa6";
