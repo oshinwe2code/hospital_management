@@ -246,11 +246,12 @@ const Request = () => {
             </Form.Group>
           </Form>
 
-          <div className="d-flex justify-content-between mt-4">
-            <button className="btn btn-danger" onClick={handleCancelClose}>
+          <div
+            className="d-flex justify-content-end
+           mt-4"
+          >
+            <button className="btn bg-light" onClick={handleCancelClose}>
               I have changed my mind
-
-              
             </button>
             <button className="btn btn-primary">Submit</button>
           </div>

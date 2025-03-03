@@ -6,7 +6,7 @@ import Experience from "./Experience";
 import Education from "./Education";
 import Award from "./Award";
 
-const DoctorProfile = () => {
+const ProfileSettings = () => {
   // State to track which component to show
   const [activeTab, setActiveTab] = useState("basic");
 
@@ -75,4 +75,4 @@ const DoctorProfile = () => {
   );
 };
 
-export default DoctorProfile;
+export default ProfileSettings;
