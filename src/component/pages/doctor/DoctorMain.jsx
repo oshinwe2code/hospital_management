@@ -19,6 +19,8 @@ import { RiUserFollowLine } from "react-icons/ri";
 import Appointment from "./appointments/Appointment";
 
 
+
+
 const DoctorMain = () => {
 
     const sidebarLinks = [
@@ -73,6 +75,7 @@ const DoctorMain = () => {
                 {/* Main Content Column */}
                 <div className="col">
                     <Appointment />
+                   
                 </div>
             </div>
         </div>

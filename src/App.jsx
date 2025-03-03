@@ -16,6 +16,7 @@ import Patient_Forget from "./component/pages/registerPage/Patient_Forget";
 import Doctor_Login from "./component/pages/registerPage/Doctor_Login";
 import Doctor_Register from "./component/pages/registerPage/Doctor_Register";
 import Doctor_Register2 from "./component/pages/registerPage/Doctor_Register2";
+import BasicDetails from "./component/pages/doctor/profilesetting/BasicDetails";
 function App() {
   const location = useLocation();
 
@@ -38,6 +39,7 @@ function App() {
         <Route path="/doctorlogin" element={<Doctor_Login/>}/>
         <Route path="/doctorregister" element={<Doctor_Register/>}/>
         <Route path="/doctorregister2" element={<Doctor_Register2/>}/>
+       
        
       </Routes>
     </>

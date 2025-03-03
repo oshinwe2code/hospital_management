@@ -39,10 +39,18 @@ const PatientProfile = () => {
   };
 
   const sidebarLinks = [
-    { path: "/dashboard", label: "Dashboard", icon: <RxDashboard /> },
-    { path: '/profile', label: 'Profile', icon: <FaRegShareFromSquare /> },
-    { path: '/settings', label: 'Settings', icon: <IoSettingsOutline /> },
-  ];
+    { path: "/patient-dashboard", label: "Dashboard", icon: <i className="bi bi-speedometer2"></i> },
+    { path: "/patient-appointment", label: "My Appointments", icon: <i className="bi bi-envelope"></i> },
+    { path: "/patient-favourites", label: "Favourites", icon: <i className="bi bi-calendar-check"></i> },
+    { path: "/patient-dependants", label: "Dependants", icon: <i className="bi bi-clock"></i> },
+    { path: "/patient-medical-records", label: "Medical Records", icon: <i className="bi bi-person-check"></i> },
+    { path: "/patient-wallet", label: "Wallet", icon: <i className="bi bi-wallet2"></i> },
+    { path: "/patient-invoices", label: "Invoices", icon: <i className="bi bi-cash"></i> },
+    { path: "/patient-message", label: "Message", icon: <i className="bi bi-share"></i> },
+    { path: "/patient-vitals", label: "Vitals", icon: <i className="bi bi-heart-pulse"></i> },
+    { path: "/patient-settings", label: "Settings", icon: <i className="bi bi-gear"></i> },
+    { path: "/patient-logout", label: "Logout", icon: <i className="bi bi-box-arrow-right"></i> },
+];
 
 
   return (

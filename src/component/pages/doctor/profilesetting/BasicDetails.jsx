@@ -3,6 +3,9 @@ import { useRef, useState } from 'react'
 import TagInput from "../../../common-element/TagInput";
 import { FaImage } from 'react-icons/fa';
 import Input from '../../../common-element/Input';
+import Sidebar from '../../../common-element/Sidebar';
+
+
 
 const BasicDetails = () => {
 
@@ -30,30 +33,34 @@ const BasicDetails = () => {
             setMemberships(memberships.filter((_, i) => i !== index));
         }
     };
-        const handleImageUpload = (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                // You can add validations here (size, type, etc.)
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    setImage(reader.result);
-                };
-                reader.readAsDataURL(file);
-            }
-        };
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            // You can add validations here (size, type, etc.)
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
 
-        const handleUploadClick = () => {
-            fileInputRef.current.click();
-        };
+    const handleUploadClick = () => {
+        fileInputRef.current.click();
+    };
 
-        // Remove the uploaded image
-        const handleRemoveImage = () => {
-            setImage(null);
-        };
+    // Remove the uploaded image
+    const handleRemoveImage = () => {
+        setImage(null);
+    };
 
-        return (
-            <div>
-                <div className="">
+    return (
+        <div className='row'>
+            <div className='col-md-12'>
+            <div className="col-md-4 p-0 overflow-hidden ">
+            <Sidebar/>
+            </div>
+                <div className="col-md-8 p-0 overflow-hidden ">
                     <div className="content">
                         <h3
                             className="font-weight-600  pt-4"
@@ -209,7 +216,11 @@ const BasicDetails = () => {
                     </div>
                 </div>
             </div>
-        )
-    }
+        </div>
 
-    export default BasicDetails;
+
+
+    )
+}
+
+export default BasicDetails;

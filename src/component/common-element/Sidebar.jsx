@@ -1,9 +1,8 @@
-// import  from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import '../Styles/general/Sidebar.css';
 
-const Sidebar = ({ links }) => {
+const Sidebar = ({ links = [] }) => { // Default to an empty array
   return (
     <div className="c_sidebar">
       <ul className="c_list">
