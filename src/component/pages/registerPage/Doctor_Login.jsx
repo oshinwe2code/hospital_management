@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Input from '../../common-element/Input';
+import Swal from 'sweetalert2'; // Assuming you're using Swal for alerts
 
 export default function Doctor_Login() {
     const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ export default function Doctor_Login() {
         password: ''
     });
     const [loginWithPhone, setLoginWithPhone] = useState(false); // Toggle between email and phone login
+    const [errors, setErrors] = useState({}); // State for storing validation errors
 
     // Handle input change
     const handleChange = (e) => {
@@ -16,6 +18,44 @@ export default function Doctor_Login() {
             ...formData,
             [name]: value,
         });
+    };
+
+    // Form validation
+    const validateForm = () => {
+        const newErrors = {};
+
+        // Email validation (only when not logging in with phone)
+        if (!loginWithPhone && !/\S+@\S+\.\S+/.test(formData.email)) {
+            newErrors.email = 'Invalid email format';
+        }
+
+        // Phone validation (only when logging in with phone)
+        if (loginWithPhone && !/^\d{10}$/.test(formData.phone)) {
+            newErrors.phone = 'Phone number must be exactly 10 digits';
+        }
+
+        // Password validation
+        if (!/(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}/.test(formData.password)) {
+            newErrors.password = 'Password must be at least 8 characters and contain both letters and numbers';
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0; // Return true if no errors
+    };
+
+    // Handle form submission
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (validateForm()) {
+            // Proceed with form submission (e.g., API call)
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Successfully!',
+                text: '',
+                confirmButtonText: 'OK'
+            });
+        }
     };
 
     return (
@@ -29,54 +69,61 @@ export default function Doctor_Login() {
                                     <div className="account-info">
                                         <div className="login-title">
                                             <h2><b>Doctor Login</b></h2>
-                                            <p className="mb-0" style={{fontSize:"18px"}}>Enter your credentials to log in</p>
-                                                 <br></br>
-                                            {/* Add the "Login with Phone number" link */}
+                                            <p className="mb-0" style={{ fontSize: "18px" }}>Enter your credentials to log in</p>
+                                            <br />
                                             <p className="mb-0">
-                                            Login with &nbsp;
+                                                Login with &nbsp;
                                                 <a href="#" onClick={() => setLoginWithPhone(!loginWithPhone)}>
                                                     {loginWithPhone ? 'Email' : 'Phone number'}
                                                 </a>
                                             </p>
                                         </div>
                                         <br />
-                                        <form action="login-success.html" style={{ fontSize: "15px" }}>
+                                        <form onSubmit={handleSubmit} style={{ fontSize: "15px" }}>
                                             {/* Conditional Input for Email or Phone */}
                                             {!loginWithPhone ? (
-                                                <Input
-                                                    label="Email"
-                                                    name="email"
-                                                    value={formData.email}
-                                                    onChange={handleChange}
-                                                    placeholder="Enter your Email"
-                                                />
+                                                <>
+                                                    <Input
+                                                        label="Email"
+                                                        name="email"
+                                                        value={formData.email}
+                                                        onChange={handleChange}
+                                                        placeholder="Enter your Email"
+                                                    />
+                                                    {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
+                                                </>
                                             ) : (
-                                                <Input
-                                                    label="Phone Number"
-                                                    name="phone"
-                                                    value={formData.phone}
-                                                    onChange={handleChange}
-                                                    placeholder="Enter your Phone Number"
-                                                />
+                                                <>
+                                                    <Input
+                                                        label="Phone Number"
+                                                        name="phone"
+                                                        value={formData.phone}
+                                                        onChange={handleChange}
+                                                        placeholder="Enter your Phone Number"
+                                                    />
+                                                    {errors.phone && <p style={{ color: 'red' }}>{errors.phone}</p>}
+                                                </>
                                             )}
 
                                             {/* Password input */}
-                                            <Input
-                                                label="Password"
-                                                name="password"
-                                                value={formData.password}
-                                                onChange={handleChange}
-                                                placeholder="Enter your Password"
-                                                type="password"
-                                            />
+                                            <>
+                                                <Input
+                                                    label="Password"
+                                                    name="password"
+                                                    value={formData.password}
+                                                    onChange={handleChange}
+                                                    placeholder="Enter your Password"
+                                                    type="password"
+                                                />
+                                                {errors.password && <p style={{ color: 'red' }}>{errors.password}</p>}
+                                            </>
 
                                             <div className="mb-3">
                                                 <button className="btn btn-primary-gradient btn-xl w-100 btn-primary" type="submit" style={{ borderRadius: "25px" }}>Login</button>
                                             </div>
 
-                                            {/* Forgot password button */}
                                             <div className="mb-3 text-center">
-                                                <a href="/patientforgetpassword" className="forgot-password-link">Forgot Password?</a>
+                                                <a href="/doctorforgetpassword" className="forgot-password-link">Forgot Password?</a>
                                             </div>
 
                                             <div className="social-login-btn">

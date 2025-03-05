@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function PatientBasicDetails() {
+export default function Clinic() {
   return (
     <div>
-      
+      Clinic page called...
     </div>
   )
 }

@@ -3,7 +3,6 @@ import { FaImage } from 'react-icons/fa';
 import Input from '../../../common-element/Input';
 
 const Education = () => {
-    // State to manage multiple education entries
     const [education, setEducation] = useState([
         {
             id: 1,
@@ -13,21 +12,16 @@ const Education = () => {
             startDate: '',
             endDate: '',
             noofyears: '',
-            image: null
+            image: null,
+            errors: {}
         }
     ]);
 
-    // Reference for file input
     const fileInputRefs = useRef([]);
 
-    // Add a new education entry
     const addEducation = () => {
-        console.log("Adding education");
         setEducation(prevEducations => {
-            const newId =
-                prevEducations.length > 0
-                    ? Math.max(...prevEducations.map(exp => exp.id)) + 1
-                    : 1;
+            const newId = prevEducations.length > 0 ? Math.max(...prevEducations.map(exp => exp.id)) + 1 : 1;
             return [
                 ...prevEducations,
                 {
@@ -38,19 +32,17 @@ const Education = () => {
                     startDate: '',
                     endDate: '',
                     noofyears: '',
-                    image: null
+                    image: null,
+                    errors: {}
                 }
             ];
         });
     };
 
-    // Delete an education entry
     const deleteEducation = (id) => {
-        if (education.length > 1)
-            setEducation(education.filter(exp => exp.id !== id));
+        if (education.length > 1) setEducation(education.filter(exp => exp.id !== id));
     };
 
-    // Handle image upload
     const handleImageUpload = (event, index) => {
         const file = event.target.files[0];
         if (file) {
@@ -64,27 +56,52 @@ const Education = () => {
         }
     };
 
-    // Handle upload button click
     const handleUploadClick = (index) => {
         if (fileInputRefs.current[index]) {
             fileInputRefs.current[index].click();
         }
     };
 
-    // Handle remove image
     const handleRemoveImage = (index) => {
         const newEducation = [...education];
         newEducation[index].image = null;
         setEducation(newEducation);
     };
 
-    // Handle changes in input fields
     const handleInputChange = (index, field, value) => {
         setEducation(prev => {
             const newEdu = [...prev];
             newEdu[index][field] = value;
             return newEdu;
         });
+    };
+
+    // Handle form validation
+    const validateForm = () => {
+        let isValid = true;
+        const updatedEducation = education.map((edu) => {
+            let errors = {};
+            if (!edu.nameoftheInstitution.trim()) errors.nameoftheInstitution = "Institution name is required";
+            if (!edu.course.trim()) errors.course = "Course is required";
+            if (!edu.startDate.trim()) errors.startDate = "Start date is required";
+            if (!edu.endDate.trim()) errors.endDate = "End date is required";
+            if (!edu.noofyears.trim()) errors.noofyears = "Number of years is required";
+
+            if (Object.keys(errors).length > 0) isValid = false;
+            return { ...edu, errors };
+        });
+
+        setEducation(updatedEducation);
+        return isValid;
+    };
+
+    const handleSubmit = () => {
+        if (validateForm()) {
+            alert("Form is valid. Submit the data.");
+            // Proceed to submit the data
+        } else {
+            console.log("Form is invalid. Please correct the errors.");
+        }
     };
 
     return (
@@ -96,7 +113,6 @@ const Education = () => {
                 </button>
             </div>
 
-            {/* Accordion */}
             <div className="accordion" id="educationAccordion">
                 {education.map((edu, index) => (
                     <div className="accordion-item shadow-lg mb-3" key={edu.id}>
@@ -150,7 +166,6 @@ const Education = () => {
                                             ) : (
                                                 <FaImage size={40} />
                                             )}
-                                            {/* Hidden file input */}
                                             <input
                                                 type="file"
                                                 accept="image/*"
@@ -176,8 +191,7 @@ const Education = () => {
                                                 Remove
                                             </button>
                                             <p className="text-muted">
-                                                Your image should be below 4 MB. Accepted formats: jpg, png,
-                                                svg.
+                                                Your image should be below 4 MB. Accepted formats: jpg, png, svg.
                                             </p>
                                         </div>
                                     </div>
@@ -192,7 +206,9 @@ const Education = () => {
                                                 onChange={(e) =>
                                                     handleInputChange(index, 'nameoftheInstitution', e.target.value)
                                                 }
+                                                error={edu.errors.nameoftheInstitution}
                                             />
+                                            {edu.errors.nameoftheInstitution && <p className="text-danger">{edu.errors.nameoftheInstitution}</p>}
                                         </div>
                                         <div className="col-md-6">
                                             <Input
@@ -203,7 +219,9 @@ const Education = () => {
                                                 onChange={(e) =>
                                                     handleInputChange(index, 'course', e.target.value)
                                                 }
+                                                error={edu.errors.course}
                                             />
+                                            {edu.errors.course && <p className="text-danger">{edu.errors.course}</p>}
                                         </div>
 
                                         <div className="col-md-4">
@@ -215,7 +233,9 @@ const Education = () => {
                                                 onChange={(e) =>
                                                     handleInputChange(index, 'startDate', e.target.value)
                                                 }
+                                                error={edu.errors.startDate}
                                             />
+                                            {edu.errors.startDate && <p className="text-danger">{edu.errors.startDate}</p>}
                                         </div>
                                         <div className="col-md-4">
                                             <Input
@@ -226,7 +246,9 @@ const Education = () => {
                                                 onChange={(e) =>
                                                     handleInputChange(index, 'endDate', e.target.value)
                                                 }
+                                                error={edu.errors.endDate}
                                             />
+                                            {edu.errors.endDate && <p className="text-danger">{edu.errors.endDate}</p>}
                                         </div>
                                         <div className="col-md-4">
                                             <Input
@@ -237,7 +259,9 @@ const Education = () => {
                                                 onChange={(e) =>
                                                     handleInputChange(index, 'noofyears', e.target.value)
                                                 }
+                                                error={edu.errors.noofyears}
                                             />
+                                            {edu.errors.noofyears && <p className="text-danger">{edu.errors.noofyears}</p>}
                                         </div>
                                         <div className="col-md-12">
                                             <Input
@@ -258,9 +282,10 @@ const Education = () => {
                 ))}
             </div>
 
-            <div className="d-flex justify-content-end gap-2">
-                <button className="c_btn" type="button">Cancel</button>
-                <button className="c_btn_primary" type="button">Save</button>
+            <div className="mt-3 text-end">
+                <button className="c_btn_primary" onClick={handleSubmit} type="button">
+                    Save
+                </button>
             </div>
         </div>
     );

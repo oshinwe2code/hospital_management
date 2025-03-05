@@ -1,0 +1,24 @@
+/* Custom select styles */
+.custom-select {
+    width: 200px; /* Set custom width */
+    height: 45px; /* Set custom height */
+    padding: 10px;
+    font-size: 16px;
+    appearance: none; /* Remove default arrow */
+    background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOCIgaGVpZ2h0PSI0IiB2aWV3Qm94PSIwIDAgOCA0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik00IDNsNCAzdi0xTDQgMWwtNCAyaDR6IiBmaWxsPSIjMDAwIi8+PC9zdmc+') no-repeat right center;
+    background-size: 1px; /* Adjust arrow size */
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+/* For input field to match height */
+.input-block-new .form-control {
+    height: 45px;
+}
+
+/* Optional - Style adjustments for better appearance */
+select:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}

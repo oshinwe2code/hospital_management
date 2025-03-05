@@ -9,6 +9,7 @@ const Award = () => {
             award: '',
             year: '',
             description: '',
+            errors: {}
         }
     ]);
 
@@ -27,6 +28,7 @@ const Award = () => {
                     award: '',
                     year: '',
                     description: '',
+                    errors: {}
                 }
             ];
         });
@@ -46,6 +48,32 @@ const Award = () => {
             newAwards[index][field] = value;
             return newAwards;
         });
+    };
+
+    // Form validation
+    const validateForm = () => {
+        let isValid = true;
+        const updatedAwards = award.map((item) => {
+            let errors = {};
+            if (!item.award.trim()) errors.award = "Award name is required";
+            if (!item.year.trim()) errors.year = "Year is required";
+
+            if (Object.keys(errors).length > 0) isValid = false;
+            return { ...item, errors };
+        });
+
+        setAward(updatedAwards);
+        return isValid;
+    };
+
+    // Handle form submission
+    const handleSubmit = () => {
+        if (validateForm()) {
+           alert("form submit");
+            // Proceed to submit the data
+        } else {
+            console.log("Form is invalid. Please correct the errors.");
+        }
     };
 
     return (
@@ -70,8 +98,8 @@ const Award = () => {
                                 aria-expanded={index === 0 ? "true" : "false"}
                                 aria-controls={`collapse${item.id}`}
                             >
-                                {item.award 
-                                    ? item.award 
+                                {item.award
+                                    ? item.award
                                     : `Award ${index + 1}`}
                             </button>
                             <button
@@ -109,7 +137,9 @@ const Award = () => {
                                                 onChange={(e) =>
                                                     handleInputChange(index, 'award', e.target.value)
                                                 }
+                                                error={item.errors.award}
                                             />
+                                            {item.errors.award && <p className="text-danger">{item.errors.award}</p>}
                                         </div>
 
                                         <div className="col-md-4">
@@ -121,7 +151,9 @@ const Award = () => {
                                                 onChange={(e) =>
                                                     handleInputChange(index, 'year', e.target.value)
                                                 }
+                                                error={item.errors.year}
                                             />
+                                            {item.errors.year && <p className="text-danger">{item.errors.year}</p>}
                                         </div>
 
                                         <div className="col-md-12">
@@ -145,7 +177,7 @@ const Award = () => {
 
             <div className="d-flex justify-content-end gap-2">
                 <button className="c_btn" type="button">Cancel</button>
-                <button className="c_btn_primary" type="button">Save</button>
+                <button className="c_btn_primary" type="button" onClick={handleSubmit}>Save</button>
             </div>
         </div>
     );

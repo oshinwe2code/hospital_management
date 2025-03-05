@@ -11,7 +11,7 @@ export default function LatestUpdate() {
             <div className="col-lg-12 col-xl-12 col-md-12 border border-gray rounded-3 ">
                 <div className="dashboard-header">
                     <br></br>
-                    <h2><b>Vitals</b></h2><br />
+                    <h2><b>Vitals</b></h2>
 
                 </div>
                 <div className="dashboard-card w-100 medical-details-item ms-3px">
@@ -58,7 +58,7 @@ export default function LatestUpdate() {
                                             <i className="bi bi-body-text me-2" style={{ color: "purple" }}></i>
                                             <span style={{ fontSize: "13px" }}>BMI &nbsp;</span>
                                         </span>
-                                    </th>
+                                    </th>&nbsp;
                                     <th>
                                         <span className="d-inline-flex align-items-center">
                                             <i className="bi bi-heart-fill me-2" style={{ color: "blue" }}></i>
@@ -69,22 +69,22 @@ export default function LatestUpdate() {
                                 </thead>
                                 <tbody>
                                   <td>
-                                  <h6><b>100 mg/dl</b></h6>
+                                  <h5><b>100 mg/dl</b></h5>
                                   </td>
                                   <td>
-                                  <h6><b>140 Bpm</b></h6>
+                                  <h5><b>140 Bpm</b></h5>
                                   </td>
                                   <td>
-                                  <h6><b>70 - 90</b></h6>
+                                  <h5><b>70 - 90</b></h5>
                                   </td>
                                   <td>
-                                  <h6><b>37.5 C</b></h6>
+                                  <h5><b>37.5 C</b></h5>
                                   </td>
                                   <td>
-                                  <h6><b>20.1 kg/m²</b></h6>
-                                  </td>
+                                  <h5><b>20.1 kg/m²</b></h5>
+                                  </td>&nbsp;&nbsp;
                                   <td>
-                                  <h6><b>96%</b></h6>
+                                  <h5><b>96%</b></h5>
                                   </td>
                                 </tbody>
                             </form>

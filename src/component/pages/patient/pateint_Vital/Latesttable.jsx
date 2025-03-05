@@ -33,7 +33,7 @@ export default function Latesttable() {
                                                 <a href="patient-profile.html" className="avatar avatar-sm me-2">
                                                     <img src="../src/assets/profile-01.webp" alt="Avatar" className="rounded-circle" style={{ width: "40px", height: "40px" }} />
                                                 </a>
-                                                Hendrita 
+                                                Hendrita
                                             </h2>
                                         </td>
                                         <td>23.5</td>
@@ -43,9 +43,9 @@ export default function Latesttable() {
                                         <td>22 Mar 2024</td>
                                         <td>
                                             <div style={{ display: 'flex', gap: '10px', alignItems: 'center', whiteSpace: 'nowrap' }}>
-                                               <div data-bs-toggle="modal" data-bs-target="#delete_modal">
-                                                                         <DeleteButton />
-                                                                       </div>
+                                                <div data-bs-toggle="modal" data-bs-target="#delete_modal">
+                                                    <DeleteButton />
+                                                </div>
                                                 <EditButton />
                                             </div>
                                         </td>
@@ -56,7 +56,7 @@ export default function Latesttable() {
                     </div>
                 </div>
             </div>
-            <DeleteButtonAction/>
+            <DeleteButtonAction />
         </div>
     );
 }

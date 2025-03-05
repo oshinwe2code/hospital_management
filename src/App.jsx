@@ -32,10 +32,10 @@ function App() {
       {!noNavbarRoutes.includes(location.pathname) && <Navbar />}
 
       <Routes>
-        <Route path="/doctor" element={<DoctorMain />} />
-        <Route path="/patient" element={<PatientMain />} />
-        <Route path="/vital" element={<PatientVital />} />
-        <Route path="/patient-medical-records" element={<PateintMedicalRecords />} />
+        <Route path="/doctor/*" element={<DoctorMain />} />
+        <Route path="/patient/*" element={<PatientMain />} />
+        {/* <Route path="/vital" element={<PatientVital />} />
+        <Route path="/patient-medical-records" element={<PateintMedicalRecords />} /> */}
         <Route path="/patientregister" element={<Patient_Register />} />
         <Route path="/patientlogin" element={<Patient_Login/>}/>
         <Route path="/patientforgetpassword" element={<Patient_Forget/>}/>

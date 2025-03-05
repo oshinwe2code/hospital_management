@@ -1,7 +1,6 @@
-// import React from 'react'
-import Sidebar from '../../common-element/Sidebar'
-import { Link } from 'react-router'
-
+import PatientSidebar from '../../common-element/PatientSidebar'; // Import PatientSidebar
+import { Link } from 'react-router-dom'; // Correct import
+import { Route, Routes } from "react-router-dom"; // Correct router import
 import img from "../../../assets/react.svg";
 import { RxDashboard } from "react-icons/rx";
 import { FaRegShareFromSquare } from "react-icons/fa6";
@@ -9,67 +8,71 @@ import { IoSettingsOutline } from "react-icons/io5";
 import HeadingNav from '../../common-element/HeadingNav';
 import { FaHome } from 'react-icons/fa';
 import Appointment from '../doctor/appointments/Appointment';
-import profileImg from "../../../assets/profile-01.webp";
-import MyPatient from '../doctor/mypatient/MyPatient';
-// import AppointmentDetails from '../doctor/appointments/AppointmentDetails';
-
+import PatientVital from "./pateint_Vital/PatientVital";
+import PateintMedicalRecords from './MedicalRecords/PateintMedicalRecords';
+import PatientProfile from './profilesetting/PatientProfile';
+import Dependent from './Dependent/Dependent';
 
 const PatientMain = () => {
-    const sidebarLinks = [
-        { path: "/dashboard", label: "Dashboard", icon: <RxDashboard /> },
-        { path: '/profile', label: 'Profile', icon: <FaRegShareFromSquare /> },
-        { path: '/settings', label: 'Settings', icon: <IoSettingsOutline /> },
+    const patientsidebarLinks = [
+        { path: "dashboard", label: "Dashboard", icon: <RxDashboard /> },
+        { path: "my-appointment", label: "My Appointment", icon: <RxDashboard /> },
+        { path: "favorite", label: "Favorites", icon: <RxDashboard /> },
+        { path: "dependent", label: "Dependents", icon: <RxDashboard /> },
+        { path: 'patient-medical-records', label: 'Medical Records', icon: <IoSettingsOutline /> },
+        { path: "wallet", label: "Wallet", icon: <RxDashboard /> },
+        { path: "invoices", label: "Invoices", icon: <RxDashboard /> },
+        { path: 'message', label: 'Message', icon: <FaRegShareFromSquare /> },
+        { path: 'patient-vital', label: 'Vitals', icon: <IoSettingsOutline /> },
+        { path: 'settings', label: 'Settings', icon: <IoSettingsOutline /> },
+        { path: 'logout', label: 'Logout', icon: <IoSettingsOutline /> },
     ];
 
-
-
-    const appointmentsData = [
-        { id: "Apt-001", name: "Adrian", profileImage: profileImg, date: "24 Feb 2025", time: "10:00 AM", visitType: "General Visit", appointmentType: "Video Call", email: "adrian@example.com", phone: "123456789" },
-        { id: "Apt-002", name: "Emily", profileImage: profileImg, date: "25 Feb 2025", time: "11:00 AM", visitType: "Consultation", appointmentType: "Audio Call", email: "emily@example.com", phone: "987654321" },
-    ];
     return (
-        <div className="container pb-5">
-            <div className="row">
+        <div className="container pb-4">
+            {/* Heading at the top */}
+            <div className="row mb-4">
                 <HeadingNav
                     icon={<FaHome />}
                     title="Patient Profile"
                     linktitle="Patient"
                 />
             </div>
-            <div className="row gap-4 px-2">
-                {/* Sidebar Column */}
-                <div className="col-sm-3 border border-gray rounded-3 p-0 overflow-hidden">
+
+            <div className="row">
+                {/* Sidebar Column (3 columns wide) */}<br></br>
+                <div className="col-md-3 border border-gray rounded-3 p-0 overflow-hidden">
                     {/* Profile Card */}
-                    <div className=" c_profile_card c_background">
+                    <div className="c_profile_card c_background p-3">
                         <img
                             src={img}
                             alt="profile"
-                        />
-                        <Link to="/">
+                            className="img-fluid mb-2"
+                        /><br></br>
+                        <Link to="/" className="text-decoration-none">
                             Handrita Hayes
                         </Link>
-                        <span className="text-muted pb-0">
-                            Patient Id: 1234
-                        </span>
-                        <span className=" font-weight-700 mb-0">
-                            Female 32 Years 3 months
-                        </span>
-
+                        <div className="text-muted">Patient Id: 1234</div>
+                        <div className="font-weight-bold">Female, 32 Years 3 months</div>
                     </div>
+
                     {/* Sidebar */}
-                    <Sidebar links={sidebarLinks} />
+                    <PatientSidebar links={patientsidebarLinks} />
                 </div>
 
-                {/* Main Content Column */}
-                <div className="col">
-                    {/* <Appointment  initialAppointments={appointmentsData}/> */}
-                    {/* <AppointmentDetails /> */}
-                    <MyPatient/>
+                {/* Main Content Column (9 columns wide) */}
+                <div className="col-md-9">
+                    <Routes>
+                        
+                        <Route path='patient-vital' element={<PatientVital />} />
+                        <Route path='patient-medical-records' element={<PateintMedicalRecords/>} />
+                        <Route path='settings' element={<PatientProfile/>} />
+                        <Route path='dependent' element={<Dependent/>} />
+                    </Routes>
                 </div>
             </div>
-
         </div>
-    )
-}
+    );
+};
 
-export default PatientMain
+export default PatientMain;

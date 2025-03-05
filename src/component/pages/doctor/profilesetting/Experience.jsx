@@ -2,10 +2,7 @@ import { useState, useRef } from 'react';
 import { FaImage } from 'react-icons/fa';
 import Input from '../../../common-element/Input';
 
-
-
 const Experience = () => {
-    // State to manage multiple experience entries
     const [experiences, setExperiences] = useState([
         {
             id: 1,
@@ -18,50 +15,49 @@ const Experience = () => {
             startDate: '',
             endDate: '',
             currentlyWorking: false,
-            image: null
-        }
+            image: null,
+            errors: {},
+        },
     ]);
 
-    // Reference for file input
     const fileInputRefs = useRef([]);
 
-    // Add a new experience entry
-    const addExperience = () => {
-        console.log("Adding experience");
-        setExperiences(prevExperiences => {
-          const newId =
-            prevExperiences.length > 0
-              ? Math.max(...prevExperiences.map(exp => exp.id)) + 1
-              : 1;
-          return [
-            ...prevExperiences,
-            {
-              id: newId,
-              title: '',
-              company: '',
-              yearsExperience: '',
-              location: '',
-              employmentType: 'Full Time',
-              description: '',
-              startDate: '',
-              endDate: '',
-              currentlyWorking: false,
-              image: null
-            }
-          ];
-        });
-      };
-      ;
-
-    // Delete an experience entry
-    const deleteExperience = (id) => {
-        if(experiences.length > 1)
-        setExperiences(experiences.filter(exp => exp.id !== id));
+    const handleChange = (index, field, value) => {
+        const updatedExperiences = [...experiences];
+        updatedExperiences[index][field] = value;
+        setExperiences(updatedExperiences);
     };
 
-    // console.log(experiences.length);
+    const addExperience = () => {
+        setExperiences(prevExperiences => {
+            const newId = prevExperiences.length > 0
+                ? Math.max(...prevExperiences.map(exp => exp.id)) + 1
+                : 1;
+            return [
+                ...prevExperiences,
+                {
+                    id: newId,
+                    title: '',
+                    company: '',
+                    yearsExperience: '',
+                    location: '',
+                    employmentType: 'Full Time',
+                    description: '',
+                    startDate: '',
+                    endDate: '',
+                    currentlyWorking: false,
+                    image: null,
+                    errors: {},
+                },
+            ];
+        });
+    };
 
-    // Handle image upload
+    const deleteExperience = (id) => {
+        if (experiences.length > 1)
+            setExperiences(experiences.filter(exp => exp.id !== id));
+    };
+
     const handleImageUpload = (event, index) => {
         const file = event.target.files[0];
         if (file) {
@@ -75,31 +71,76 @@ const Experience = () => {
         }
     };
 
-    // Handle upload button click
     const handleUploadClick = (index) => {
         if (fileInputRefs.current[index]) {
             fileInputRefs.current[index].click();
         }
     };
 
-    // Handle remove image
     const handleRemoveImage = (index) => {
         const newExperiences = [...experiences];
         newExperiences[index].image = null;
         setExperiences(newExperiences);
     };
 
+    const validateForm = () => {
+        let valid = true;
+        const updatedExperiences = experiences.map((experience) => {
+            const errors = {};
+
+            if (!experience.title) {
+                errors.title = 'Title is required';
+                valid = false;
+            }
+
+            if (!experience.company) {
+                errors.company = 'Company is required';
+                valid = false;
+            }
+
+            if (!experience.yearsExperience) {
+                errors.yearsExperience = 'Years of experience is required';
+                valid = false;
+            }
+
+            if (!experience.location) {
+                errors.location = 'Location is required';
+                valid = false;
+            }
+
+            if (!experience.startDate) {
+                errors.startDate = 'Start date is required';
+                valid = false;
+            }
+
+            if (!experience.currentlyWorking && !experience.endDate) {
+                errors.endDate = 'End date is required';
+                valid = false;
+            }
+
+            return { ...experience, errors };
+        });
+
+        setExperiences(updatedExperiences);
+        return valid;
+    };
+
+    const handleSubmit = () => {
+        if (validateForm()) {
+           alert("form submitted ")
+        } else {
+            console.log("Form has errors.");
+        }
+    };
+
     return (
         <div className="w-100 pt-4">
             <div className="d-flex justify-content-between align-items-center mb-3">
-                <h2 className="font-weight-700">
-                    Experience
-                </h2>
+                <h2 className="font-weight-700">Experience</h2>
                 <button className="c_btn_primary" onClick={addExperience} type="button">Add Experience</button>
             </div>
 
-            {/* Accordion */}
-            <div className="accordion " id="experienceAccordion">
+            <div className="accordion" id="experienceAccordion">
                 {experiences.map((experience, index) => (
                     <div className="accordion-item shadow-lg mb-3" key={experience.id}>
                         <h2 className="accordion-header position-relative" id={`heading${experience.id}`}>
@@ -147,7 +188,6 @@ const Experience = () => {
                                             ) : (
                                                 <FaImage size={40} />
                                             )}
-                                            {/* Hidden file input */}
                                             <input
                                                 type="file"
                                                 accept="image/*"
@@ -170,53 +210,121 @@ const Experience = () => {
                                             >
                                                 Remove
                                             </button>
-                                            <p className="text-muted">
-                                                Your image should be below 4 MB. Accepted formats: jpg, png,
-                                                svg.
-                                            </p>
+                                            <p className="text-muted">Your image should be below 4 MB. Accepted formats: jpg, png, svg.</p>
                                         </div>
                                     </div>
 
                                     <div className="row mt-3">
                                         <div className="col-md-4">
-                                            <Input label="Title" type="text" name={`title-${experience.id}`} />
+                                            <Input
+                                                label="Title"
+                                                type="text"
+                                                name={`title-${experience.id}`}
+                                                value={experience.title}
+                                                onChange={(e) => handleChange(index, 'title', e.target.value)}
+                                                error={experience.errors.title}
+                                            />
+                                            {experience.errors.title && <p className="text-danger">{experience.errors.title}</p>}
                                         </div>
                                         <div className="col-md-4">
-                                            <Input label="Hospital" type="text" name={`company-${experience.id}`} />
+                                            <Input
+                                                label="Hospital"
+                                                type="text"
+                                                name={`company-${experience.id}`}
+                                                value={experience.company}
+                                                onChange={(e) => handleChange(index, 'company', e.target.value)}
+                                                error={experience.errors.company}
+                                            />
+                                            {experience.errors.company && <p className="text-danger">{experience.errors.company}</p>}
                                         </div>
                                         <div className="col-md-4">
-                                            <Input label="Years of Experience" type="text" name={`experience-${experience.id}`} />
+                                            <Input
+                                                label="Years of Experience"
+                                                type="text"
+                                                name={`yearsExperience-${experience.id}`}
+                                                value={experience.yearsExperience}
+                                                onChange={(e) => handleChange(index, 'yearsExperience', e.target.value)}
+                                                error={experience.errors.yearsExperience}
+                                            />
+                                            {experience.errors.yearsExperience && <p className="text-danger">{experience.errors.yearsExperience}</p>}
                                         </div>
                                         <div className="col-md-6">
-                                            <Input label="Location" type="text" name={`location-${experience.id}`} />
+                                            <Input
+                                                label="Location"
+                                                type="text"
+                                                name={`location-${experience.id}`}
+                                                value={experience.location}
+                                                onChange={(e) => handleChange(index, 'location', e.target.value)}
+                                                error={experience.errors.location}
+                                            />
+                                            {experience.errors.location && <p className="text-danger">{experience.errors.location}</p>}
                                         </div>
                                         <div className="col-md-6">
                                             <label htmlFor={`employment-type-${experience.id}`} className="form-label">Employment Type</label>
-                                            <select name={`employment-type-${experience.id}`} id={`employment-type-${experience.id}`} className="form-control w-100 font-size-1">
+                                            <select
+                                                name={`employment-type-${experience.id}`}
+                                                id={`employment-type-${experience.id}`}
+                                                className="form-control w-100 font-size-1"
+                                                value={experience.employmentType}
+                                                onChange={(e) => handleChange(index, 'employmentType', e.target.value)}
+                                            >
                                                 <option value="Full Time">Full Time</option>
                                                 <option value="Part Time">Part Time</option>
                                             </select>
                                         </div>
 
                                         <div className="col-lg-12">
-                                            <Input label="Job Description" type="text-area" name={`description-${experience.id}`} />
+                                            <label className="mb-1 mt-3">Description</label>
+                                            <textarea
+                                                name={`description-${experience.id}`}
+                                                value={experience.description}
+                                                onChange={(e) => handleChange(index, 'description', e.target.value)}
+                                                rows={6}
+                                                className="form-control"
+                                                placeholder="Describe your experience"
+                                            />
                                         </div>
 
                                         <div className="col-md-4">
-                                            <Input label="Start Date" type="date" name={`start-date-${experience.id}`} />
+                                            <Input
+                                                label="Start Date"
+                                                type="date"
+                                                name={`startDate-${experience.id}`}
+                                                value={experience.startDate}
+                                                onChange={(e) => handleChange(index, 'startDate', e.target.value)}
+                                                error={experience.errors.startDate}
+                                            />
+                                            {experience.errors.startDate && <p className="text-danger">{experience.errors.startDate}</p>}
                                         </div>
                                         <div className="col-md-4">
-                                            <Input label="End Date" type="date" name={`end-date-${experience.id}`} />
-                                        </div>
-                                        <div className="col-md-4 d-flex align-items-center gap-2 pt-3 text-capitalize">
-                                            <input
-                                                id={`currently-working-${experience.id}`}
-                                                type="checkbox"
-                                                name={`currently-working-${experience.id}`}
+                                            <Input
+                                                label="End Date"
+                                                type="date"
+                                                name={`endDate-${experience.id}`}
+                                                value={experience.endDate}
+                                                onChange={(e) => handleChange(index, 'endDate', e.target.value)}
+                                                disabled={experience.currentlyWorking}
+                                                error={experience.errors.endDate}
                                             />
-                                            <label htmlFor={`currently-working-${experience.id}`}>I am currently working here</label>
+                                            {experience.errors.endDate && <p className="text-danger">{experience.errors.endDate}</p>}
+                                        </div>
+
+                                        <div className="col-md-4">
+                                            <div className="form-check d-flex mt-3">
+                                                <input
+                                                    type="checkbox"
+                                                    className="form-check-input me-2"
+                                                    name={`currentlyWorking-${experience.id}`}
+                                                    checked={experience.currentlyWorking}
+                                                    onChange={(e) => handleChange(index, 'currentlyWorking', e.target.checked)}
+                                                />
+                                                <label className="form-check-label" htmlFor={`currentlyWorking-${experience.id}`}>
+                                                    I am currently working here
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -224,10 +332,7 @@ const Experience = () => {
                 ))}
             </div>
 
-            <div className="d-flex justify-content-end gap-2">
-                <button className='c_btn'>Cancel</button>
-                <button className="c_btn_primary" type="button">Save</button>
-            </div>
+            <button className="c_btn_primary mt-3" onClick={handleSubmit} style={{marginLeft:"660px"}}>Save Experience</button>
         </div>
     );
 };
